@@ -1,0 +1,8 @@
+{
+  "name": "p2pinsurance",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
