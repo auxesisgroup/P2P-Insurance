@@ -1,14 +1,34 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      P2P Insurance
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+<ion-content class="homepage" padding>
+
+  <ion-card class="title">
+    <ion-card-header>
+      P2P INSURANCE
+    </ion-card-header>
+  </ion-card>
+
+  <img src="assets/imgs/insurance.jpg" class="insurance">
+
+  <ion-card class="btns">
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+            <button ion-button color="primary" (click)="user()">User</button> 
+        </ion-col>
+        <ion-col>
+            <button ion-button color="dark" (click)="admin()">Admin</button> 
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  
+  
+</ion-content> 
+ 
