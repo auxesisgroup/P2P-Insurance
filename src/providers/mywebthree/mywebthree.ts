@@ -77,6 +77,14 @@ export class MywebthreeProvider {
     console.log("pers",pers)
     let ac = this.web3.eth;
     console.log("ac",ac) 
+
+    // var per = this.web3.eth.net.getPeerCount();
+    // per.then(
+    //   d=>{
+    //     console.log(d)
+    //   }
+    // )
+    console.log("per",this.web3.net.peerCount) 
   }
 
   reinit(){
@@ -205,6 +213,7 @@ export class MywebthreeProvider {
           }
           // console.log("flagwhlle",flag)
         }
+        
         resolve({
           status:"ok",
           data:{

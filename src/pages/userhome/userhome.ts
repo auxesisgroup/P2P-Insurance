@@ -64,7 +64,7 @@ export class UserhomePage {
     console.log("address,privatekey",address,privatekey);
 
     // this.loadContract();
-    // this.myweb.getPeerCounts();
+    this.myweb.getPeerCounts();
   }
 
   loadContract(){
