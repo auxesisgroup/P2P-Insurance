@@ -72,7 +72,7 @@ export class AdminPage {
         }
       },
       e=>{
-        console.log(e)
+        // console.log(e)
         this.toastCtrl.create({
           message:"Amount & Private Key Not Generated",
           duration:1500,

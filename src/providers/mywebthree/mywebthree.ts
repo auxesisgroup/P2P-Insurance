@@ -72,6 +72,13 @@ export class MywebthreeProvider {
     } 
   }
 
+  getPeerCounts(){
+    let pers = this.web3.eth.accounts;
+    console.log("pers",pers)
+    let ac = this.web3.eth;
+    console.log("ac",ac) 
+  }
+
   reinit(){
     return this.web3;
   }
@@ -87,10 +94,12 @@ export class MywebthreeProvider {
     return new Promise((resolve,reject)=>{
       
       var pk_string = '';
+      // this.web3 = this.reinit();
       for(let i=0;i<30;i++){
           let subtring = Math.random()
           pk_string += subtring.toString()
-      }
+      } 
+      console.log(this.web3)
       // alert('pk_string \n'+pk_string)
       var privatekey = this.web3.sha3(pk_string);
 
@@ -99,7 +108,7 @@ export class MywebthreeProvider {
       // var generated_address = EthJS.Util.privateToAddress(pk).toString("hex");
       // alert(generated_address)
       var wallet = new ethers.Wallet(privatekey);
-      // console.info(wallet);
+      console.info(privatekey,wallet);
 
       let address = wallet.address;
       if( address==null || privatekey==null ){
@@ -107,7 +116,7 @@ export class MywebthreeProvider {
       }else{
         this.cryptoProvider.saveToLocal("P2PUserAddress",address);
         this.cryptoProvider.saveToLocal("P2PUserPrivateKey",privatekey);
-        this.abiforadmin();
+        // this.abiforadmin();
         resolve({status:"ok",address:address,privatekey:privatekey});
       }
     })
@@ -184,6 +193,7 @@ export class MywebthreeProvider {
         var flag = true;
         var iter = 0;
         var contract = this.abiforuser();
+        console.log("contract",contract.Peers(1))
         while (flag){
           if (contract.Peers(iter) == "0x") {
             flag = false;
@@ -519,6 +529,14 @@ export class MywebthreeProvider {
  
   logout(){
     this.localStore.clear();
+    let auth = this.cryptoProvider.retrieveTokenAuth();
+    // console.log("auth",auth)
+    if( auth == "" || auth == null || auth == undefined){
+      this.cryptoProvider.saveTokenAuth();
+      // console.log(this.cryptoProvider.retrieveTokenAuth());
+    }else{
+      // console.log("already created",this.cryptoProvider.retrieveTokenAuth())
+    } 
   } 
 
 

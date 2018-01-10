@@ -8,22 +8,23 @@
 
 <ion-content class="homepage" padding>
 
-  <ion-card class="title">
+  <ion-card class="title card">
     <ion-card-header>
-      P2P INSURANCE
+      P2P<br> INSURANCE
     </ion-card-header>
   </ion-card>
 
-  <img src="assets/imgs/insurance.jpg" class="insurance">
-
+  <div class="text-center img">
+    <img src="assets/imgs/li.png" class="insurance">
+  </div>
   <ion-card class="btns">
     <ion-card-content>
       <ion-row>
         <ion-col>
-            <button ion-button color="primary" (click)="user()">User</button> 
+            <button ion-button color="primary" large round  (click)="user()">User</button> 
         </ion-col>
         <ion-col>
-            <button ion-button color="dark" (click)="admin()">Admin</button> 
+            <button ion-button color="dark" large round  (click)="admin()">Admin</button> 
         </ion-col>
       </ion-row>
     </ion-card-content>

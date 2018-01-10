@@ -4,8 +4,36 @@ page-admin {
         text-align: center;
         margin-left: 25%;
         margin-right: 25%;
+        color: beige;
     }
     ion-item.text-center.iitembtn button {
         float: right;
+    }
+
+    .adminbg{
+        background: #011931;
+    }
+
+    .generatekey {
+        text-align: center;
+    }
+    .payetherdiv {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .actionbtn {
+        text-align: center;
+        margin-top: 5%;
+    }
+    div.actionbtn button {
+        width: 50%;
+    }
+    ion-list.adminform {
+        margin: 0 20px 0 20px;
+    }
+    ion-list.adminform ion-item {
+        margin-top: 4%;
+        border-radius: 50px;
     }
 }

@@ -63,7 +63,8 @@ export class UserhomePage {
     let privatekey = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
     console.log("address,privatekey",address,privatekey);
 
-    this.loadContract();
+    // this.loadContract();
+    // this.myweb.getPeerCounts();
   }
 
   loadContract(){
@@ -191,7 +192,7 @@ export class UserhomePage {
                   position:'top'
                 }).present();
               }
-            ).catch(
+            ).catch( 
               e=>{
                 this.loadController.dismiss();
                 console.error(e)

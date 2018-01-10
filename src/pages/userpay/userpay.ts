@@ -67,7 +67,7 @@ export class UserpayPage {
         if(dt.status=="ok"){
           this.userdatabal = dt.data.balance;
           this.t_balance = dt.data.t_balance;
-          
+           
         }
         else{
           console.log("failed")
@@ -109,7 +109,7 @@ export class UserpayPage {
             this.toastCtrl.create({
               message:"Amount "+amnt+" payed",
               duration:1500,
-              position:'top'
+              position:'middle'
             }).present();
             this.amount = "";
             // this.loadPay();

@@ -1,3 +1,19 @@
 page-usertab {
+    ion-tabs.tabs div.tabbar {
+        background: #011931;
+    }
+    ion-tabs.tabs div.tabbar a{
+        color: beige; 
+    }
 
+    .tab-button-icon {
+        color: beige;
+    }
+    .tab-button[aria-selected=true]{
+        color: beige;
+    }
+    .tabs-md ion-icon.tab-button-icon {
+        color: beige;
+    }
 }
+ 

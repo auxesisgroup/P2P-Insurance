@@ -19,12 +19,12 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="adminbg" padding>
   
-  <div class="text-center">
+  <div class="generatekey">
     <button ion-button color="primary" (click)="generatekeypair()">Generate Key Pair</button> 
   </div>
-  <ion-card>
+  <ion-card class="cardsecret1">
 
     <ion-card-header>
       Address
@@ -36,7 +36,7 @@
   
   </ion-card>
 
-  <ion-card>
+  <ion-card class="cardseceret2">
 
     <ion-card-header>
       Private Key
@@ -48,23 +48,27 @@
   
   </ion-card>
 
-
-  <b class="payetherb">Send ether to Address</b>
-  <ion-list>
+  <div class="payetherdiv">
+    <b class="payetherb">Send ether to Address</b>
+  </div>
+  <ion-list class="adminform">
 
     <ion-item>
-      <ion-label floating>Enter Address</ion-label>
-      <ion-input type="text" [(ngModel)]="address" aria-placeholder="Enter Address"></ion-input>
+      <!-- <ion-label floating>Enter Address</ion-label> -->
+      <ion-input type="text" [(ngModel)]="address" placeholder="Enter Address"></ion-input>
     </ion-item>
   
     <ion-item>
-      <ion-label floating>Enter Amount</ion-label>
-      <ion-input type="number" [(ngModel)]="amount"></ion-input>
+      <!-- <ion-label floating>Enter Amount</ion-label> -->
+      <ion-input type="number" [(ngModel)]="amount" placeholder="Enter Amount"></ion-input>
     </ion-item>
     
-    <ion-item class="text-center iitembtn">
-      <button ion-button color="secondary" round large (click)="submit()">Pay</button>
-    </ion-item>
+    <!-- <ion-item class="text-center iitembtn">
+      
+    </ion-item> -->
   </ion-list> 
+  <div class="actionbtn">
+    <button ion-button color="secondary" round  (click)="submit()">Pay</button>
+  </div>
 
 </ion-content>

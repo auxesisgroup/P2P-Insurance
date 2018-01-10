@@ -1,5 +1,58 @@
 page-userlogin {
     img.loginimg {
         padding: 10%;
+        width: 70%;
+        height: 70%;
+    }
+    .loginbg{
+        background: #011931;
+    }
+    .loginimgdiv {
+        text-align: center;
+    }
+
+    .loginbg ion-list.list.list-md ion-item {
+        background: transparent;
+    }
+
+    .loginbg ion-list ion-item.item.item-block.item-md {
+        background: #fff;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: center;
+        margin-top: 2%;
+        border-radius: 50px;
+    }
+    .loginbg ion-list.list.list-md ion-item.inputtext{
+        opacity: 0.70;
+    }
+    .loginbg ion-list.list.list-md {
+        margin: 0 25px 0 25px;
+    }
+
+    button.letmeinbtn {
+        margin-top: 5%;
+    }
+
+    ion-card.title.card.card-md {
+        background: #011931;
+        text-align: center;
+    } 
+    .card-header-md{
+        color: beige;
+        font-size: 1.8em;
+        font-family: monospace;
+        font-weight: 600;
+    }
+
+    input.text-input {
+        color: #011931;
+        font-weight: 500;
+    }
+
+    h6.generatehere {
+        color: beige;
+        text-align: center;
+        font-size: 1.0em;
     }
 }

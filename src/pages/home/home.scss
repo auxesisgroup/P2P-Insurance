@@ -3,12 +3,33 @@ page-home {
         text-align: center;
     }
     img.insurance {
-        margin-top: 25%;
+        margin-top: 20%;
     }
     ion-card.title.card.card-md {
-        margin-top: 12%;
+        margin-top: 5%;
     }
     ion-card.btns.card.card-md {
-        margin-top: 20%;
+        margin-top: 5%;
+        background: transparent; 
+        box-shadow: none;
+    }
+    .homepage{
+        background: url("../assets/imgs/bbl4.jpg");
+        background-repeat: no-repeat;
+        background-size: cover; 
+    }
+    .text-center.img {
+        text-align: center;
+    }
+    .homepage ion-card-header.card-header.card-header-md {
+        font-size: 1.8em;
+        font-family: monospace;
+        background: #011931;
+        border-color: #011931;
+        font-weight: 600;
+        color: beige;
+    }
+    ion-card.title.card.card-md {
+        background: #011931;
     }
 }
