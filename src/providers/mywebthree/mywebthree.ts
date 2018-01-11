@@ -34,8 +34,8 @@ export class MywebthreeProvider {
     public cryptoProvider:CryptoProvider,
     public toastCtrl:ToastController,
   ) {
-    console.log('Hello MywebthreeProvider Provider');
-    console.log('nav ',this.nav)
+    // console.log('Hello MywebthreeProvider Provider');
+    // // console.log('nav ',this.nav)
     if (typeof this.web3 !== 'undefined') {
       this.web3 = new Web3(Web3.currentProvider);
     } else {
@@ -44,11 +44,11 @@ export class MywebthreeProvider {
   }
 
   init(){
-    console.log("init")
+    // // console.log("init")
     
     if (!this.web3.isConnected()) {
       // do stuff as usual, even though isConnected is asynchronous
-      console.warn("not "+this.web3.isConnected()+" ");
+      // console.warn("not "+this.web3.isConnected()+" "); 
       // if (typeof this.web3 !== 'undefined') {
       //     // web3 = new Web3(web3.currentProvider);  new Web3.providers.HttpProvider
       //     // web3 = new Web3(new Web3.currentProvider);
@@ -57,45 +57,50 @@ export class MywebthreeProvider {
       //     // set the provider you want from Web3.providers
       //     // web3 = new Web3(new Web3.providers.HttpProvider("http://139.59.213.205:7007"));
       //     this.web3 = new Web3(new Web3.providers.HttpProvider("http://139.59.213.205:7007"));
-      //     console.log(this.web3)
+      //     // console.log(this.web3)
       // }
     }else {
-      console.log("connected "+ this.web3.isConnected()+" ",this.web3);
+      // // console.log("connected "+ this.web3.isConnected()+" ",this.web3);
     }
     let auth = this.cryptoProvider.retrieveTokenAuth();
-    // console.log("auth",auth)
+    // // console.log("auth",auth)
     if( auth == "" || auth == null || auth == undefined){
       this.cryptoProvider.saveTokenAuth();
-      // console.log(this.cryptoProvider.retrieveTokenAuth());
+      // // console.log(this.cryptoProvider.retrieveTokenAuth());
     }else{
-      // console.log("already created",this.cryptoProvider.retrieveTokenAuth())
+      // // console.log("already created",this.cryptoProvider.retrieveTokenAuth())
     } 
   }
 
   getPeerCounts(){
     let pers = this.web3.eth.accounts;
-    console.log("pers",pers)
+    // // console.log("pers",pers)
     let ac = this.web3.eth;
-    console.log("ac",ac) 
+    // // console.log("ac",ac) 
 
     // var per = this.web3.eth.net.getPeerCount();
     // per.then(
     //   d=>{
-    //     console.log(d)
+    //     // console.log(d)
     //   }
     // )
-    console.log("per",this.web3.net.peerCount) 
+    // console.log("per",this.web3.net.peerCount) 
   }
 
   reinit(){
     return this.web3;
   }
 
+  getLocalContractAddress(){
+    let contract = "0x245d469b8eefcddcb03a674c053b43803611de1e";
+    return contract;
+  }
+
   abiforadmin(){
-    var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+    var cont_address = this.getLocalContractAddress();
     const abi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimApprovers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"Peers","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Claim","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Claims","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Settled","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"LastClaimed","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"claiming_user","type":"address"}],"name":"getClaimAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"approval_address","type":"address"}],"name":"ApproveAtomic","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"claiming_user","type":"address"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"reimbursing_address","type":"address"},{"indexed":false,"name":"claim_amount","type":"uint256"}],"name":"Reimbursed","type":"event"}];
     var contract =   this.web3.eth.contract(abi).at(cont_address);
-    console.log(contract);
+    // console.log(contract);
   }
 
   generatekeypair(){
@@ -107,7 +112,7 @@ export class MywebthreeProvider {
           let subtring = Math.random()
           pk_string += subtring.toString()
       } 
-      console.log(this.web3)
+      // console.log(this.web3)
       // alert('pk_string \n'+pk_string)
       var privatekey = this.web3.sha3(pk_string);
 
@@ -135,7 +140,7 @@ export class MywebthreeProvider {
     return new Promise((resolve,reject)=>{  
       let send_address = address;
       let amnt = amount;
-      console.log(this.web3.eth.accounts)
+      // console.log(this.web3.eth.accounts)
       this.web3.personal.unlockAccount(this.web3.eth.accounts[0], "asd", 180);
       var tx = this.web3.eth.sendTransaction({
         from:this.web3.eth.accounts[0], 
@@ -158,10 +163,11 @@ export class MywebthreeProvider {
    * For homepage
    */
   abiforuser(){
-    var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+    var cont_address = this.getLocalContractAddress();
     const abi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimApprovers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"Peers","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Claim","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Claims","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Settled","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"LastClaimed","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"claiming_user","type":"address"}],"name":"getClaimAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"approval_address","type":"address"}],"name":"ApproveAtomic","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"claiming_user","type":"address"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"reimbursing_address","type":"address"},{"indexed":false,"name":"claim_amount","type":"uint256"}],"name":"Reimbursed","type":"event"}];
-    var contract =   this.web3.eth.contract(abi).at(cont_address);
-    console.log("contract",contract)
+    const w3 = this.web3;
+    var contract =   w3.eth.contract(abi).at(cont_address);
+    // // console.log("contract",contract)
     return contract;
   }
 
@@ -188,40 +194,45 @@ export class MywebthreeProvider {
   }
 
   loadHomeDataForUser(){
+    const w3 = this.web3;
     return new Promise((resolve,reject)=>{
       // this.reinit();
-      // console.log("connected "+ this.web3.isConnected()+" ",this.web3.currentProvider);
-       
+      // // console.log("connected "+ this.web3.isConnected()+" ",this.web3.currentProvider);
       let addressLocal =  this.cryptoProvider.retrieveFromLocal("P2PUserAddress");
       let pkeyLocal = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
-      // console.log(addressLocal,pkeyLocal)
+      // // console.log(addressLocal,pkeyLocal)
       if(addressLocal == "" || addressLocal == null || pkeyLocal == "" || pkeyLocal == null){
         reject({status:"failed"})
       }else{
         var flag = true;
         var iter = 0;
         var contract = this.abiforuser();
-        console.log("contract",contract.Peers(1))
+        // // console.log("this.web3.eth.accounts;",this.web3.eth.accounts)
+        // // console.log("contract",contract)
+        // // console.log("contract",contract.Peers(1))
         while (flag){
+        // for(iter=0;iter<20;iter++){
+          // console.log("flagfalse "+iter,flag,contract.Peers(iter))          
           if (contract.Peers(iter) == "0x") {
             flag = false;
-            // console.log("flagfalse",flag)
+            // console.log("flagfalse "+iter,flag)
+            break;
           }
           else{
             iter++;
-            // console.log("flagitr",flag,iter)
+            // // console.log("flagitr",flag,iter)
           }
-          // console.log("flagwhlle",flag)
+          // // console.log("flagwhlle",flag)
         }
         
         resolve({
           status:"ok",
           data:{
             peer:iter,
-            add_bal:this.web3.fromWei(this.web3.eth.getBalance(addressLocal)) + ' ethers',
-            total:this.web3.fromWei(contract.totalFund()) + ' ethers',
-            premium:this.web3.fromWei(contract.Balance(addressLocal)) + ' ethers',
-            claim:this.web3.fromWei(contract.getClaimAmount(addressLocal)) + ' ethers',
+            add_bal:w3.fromWei(w3.eth.getBalance(addressLocal)) + ' ethers',
+            total:w3.fromWei(contract.totalFund()) + ' ethers',
+            premium:w3.fromWei(contract.Balance(addressLocal)) + ' ethers',
+            claim:w3.fromWei(contract.getClaimAmount(addressLocal)) + ' ethers',
             claim_status:contract.Claims(addressLocal),
             claim_approvers:contract.ClaimApprovers(addressLocal),
             claim_votes:contract.ClaimVotes(addressLocal)
@@ -235,7 +246,7 @@ export class MywebthreeProvider {
    * For Paypage
    */
   forPayContract(){
-    var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+    var cont_address = this.getLocalContractAddress();//"0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
     const abi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimApprovers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"Peers","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Claim","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Claims","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Settled","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"LastClaimed","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"claiming_user","type":"address"}],"name":"getClaimAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"approval_address","type":"address"}],"name":"ApproveAtomic","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"claiming_user","type":"address"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"reimbursing_address","type":"address"},{"indexed":false,"name":"claim_amount","type":"uint256"}],"name":"Reimbursed","type":"event"}];
     var contract = this.web3.eth.contract(abi).at(cont_address);
     return contract;
@@ -256,13 +267,13 @@ export class MywebthreeProvider {
         while (flag){
           if (contract.Peers(iter) == "0x") {
             flag = false;
-            // console.log("flagfalse",flag)
+            // // console.log("flagfalse",flag)
           }
           else{
             iter++;
-            // console.log("flagitr",flag,iter)
+            // // console.log("flagitr",flag,iter)
           }
-          // console.log("flagwhlle",flag)
+          // // console.log("flagwhlle",flag)
         }
         var bal = this.web3.fromWei(this.web3.eth.getBalance(addressLocal));
         var bal1 = bal + ' ethers';
@@ -294,10 +305,10 @@ export class MywebthreeProvider {
       if(premium == null){
         reject({status:"failed",message:"Amount is invalid"});
       }else{
-        var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+        var cont_address = this.getLocalContractAddress();
         let address =  this.cryptoProvider.retrieveFromLocal("P2PUserAddress");
         let pk = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
-        // console.log(t_balance,premium)
+        // // console.log(t_balance,premium)
         if (t_balance) {
           if (premium > t_balance) {
             reject({status:"failed",message:"insufficient funds!"})
@@ -313,7 +324,7 @@ export class MywebthreeProvider {
             let nonce = this.web3.toHex(fornonce);
             let gasLimit = this.web3.toHex(100000);
             let forgp = this.web3.eth.gasPrice;
-            // console.log(forgp)
+            // // console.log(forgp)
             let gasPrice = this.web3._extend.utils.toHex(forgp);
 
             let rawtx = {
@@ -324,26 +335,26 @@ export class MywebthreeProvider {
               gasLimit: gasLimit,
               gasPrice: gasPrice
             }
-            // console.log(rawtx);
+            // // console.log(rawtx);
             
             var tx = new Tx(rawtx);
-            // console.log("tx obj", tx);
+            // // console.log("tx obj", tx);
             tx.sign(privateKey);
                 // reject({status:"failed",message:"transaction failed"});
             let serializedTx = tx.serialize().toString('hex')
-            // console.log('serializedTx:', serializedTx);
+            // // console.log('serializedTx:', serializedTx);
             var takeHash;
             this.web3.eth.sendRawTransaction("0x" + serializedTx.toString('hex'),function (err, hash){
-              // console.log("gheredfss");
+              // // console.log("gheredfss");
               if (err) { 
                 reject({status:"failed",message:"transaction failed"});
-                // console.log(err); 
+                // // console.log(err); 
                 return; 
                 // takeHash = null;
                 // return null; 
               }
               if(hash){
-                // console.log('tx hash: ' + hash);
+                // // console.log('tx hash: ' + hash);
                 takeHash = hash;
                 // return hash;
                 resolve({
@@ -369,10 +380,10 @@ export class MywebthreeProvider {
    * For claimpage
    */
   forClaimContract(){
-    var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+    var cont_address = this.getLocalContractAddress();
     const abi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimApprovers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"Peers","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Claim","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Claims","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Settled","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"LastClaimed","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"claiming_user","type":"address"}],"name":"getClaimAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"approval_address","type":"address"}],"name":"ApproveAtomic","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"claiming_user","type":"address"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"reimbursing_address","type":"address"},{"indexed":false,"name":"claim_amount","type":"uint256"}],"name":"Reimbursed","type":"event"}];
     var contract = this.web3.eth.contract(abi).at(cont_address);
-    // console.log("contract",contract)
+    // // console.log("contract",contract)
     return contract; 
   }
 
@@ -380,7 +391,7 @@ export class MywebthreeProvider {
     return new Promise((resolve,reject)=>{
       let addressLocal =  this.cryptoProvider.retrieveFromLocal("P2PUserAddress");
       let pkeyLocal = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
-      // console.log(addressLocal,pkeyLocal)
+      // // console.log(addressLocal,pkeyLocal)
       if(addressLocal == "" || addressLocal == null || pkeyLocal == "" || pkeyLocal == null){
         reject({status:"failed"})
       }else{
@@ -400,11 +411,11 @@ export class MywebthreeProvider {
         }
         console.log(addr_list)
         let list = [];
-        addr_list = ["0xf5e843d44da76a873dd529e3c6e6af13cc77683d", "0x4e2dcb450493ad0dfd15929bb7b50a0aa68d9171"];
+        // addr_list = ["0xf5e843d44da76a873dd529e3c6e6af13cc77683d", "0x4e2dcb450493ad0dfd15929bb7b50a0aa68d9171"];
         for(let i=0;i<addr_list.length;i++){
           // if (parseInt(contract.Claims(addr_list[i])) ) {
 
-            console.log(addr_list[i]);
+            // console.log(addr_list[i]);
             list.push({
               Address:addr_list[i],
               Amount:this.web3.fromWei(contract.getClaimAmount(addr_list[i])),
@@ -432,7 +443,7 @@ export class MywebthreeProvider {
     return new Promise((resolve,reject)=>{
       let addressLocal =  this.cryptoProvider.retrieveFromLocal("P2PUserAddress");
       let pkeyLocal = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
-      // console.log(addressLocal,pkeyLocal)
+      // // console.log(addressLocal,pkeyLocal)
       if(addressLocal == "" || addressLocal == null || pkeyLocal == "" || pkeyLocal == null){
         reject({status:"failed"})
       }else{
@@ -440,9 +451,9 @@ export class MywebthreeProvider {
         var contract = this.forClaimContract();
         var privateKey = Buffer.Buffer(pkeyLocal.slice(2, pkeyLocal.length), 'hex')
         var hexdata = contract.ApproveAtomic.getData(_addr);
-        var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+        var cont_address = this.getLocalContractAddress();
         var gas = 90000;
-        console.log("hexdata", hexdata, gas);
+        // console.log("hexdata", hexdata, gas);
         var rawtx = {
           from: addressLocal,
           to: cont_address,
@@ -451,19 +462,19 @@ export class MywebthreeProvider {
           gasLimit: this.web3.toHex(gas),
           // v:"0x41"
         }
-        console.log(rawtx);
+        // console.log(rawtx);
         var tx = new Tx(rawtx)
-        console.log("tx obj", tx);
+        // console.log("tx obj", tx);
         tx.sign(privateKey);
         let serializedTx = tx.serialize().toString('hex')
-        console.log('serializedTx:', serializedTx);
+        // console.log('serializedTx:', serializedTx);
         this.web3.eth.sendRawTransaction("0x" + serializedTx.toString('hex'), function(err, hash){
           if (err) {
             reject({status:"failed",message:"transaction failed"});
-            console.log(err); return; 
+            // console.log(err); return; 
           }
           if(hash){
-            console.log('tx hash: ' + hash);
+            // console.log('tx hash: ' + hash);
             resolve({
               status:"ok",message:"transaction completed",
               data:c,hash:hash
@@ -480,29 +491,29 @@ export class MywebthreeProvider {
     return new Promise((resolve,reject)=>{
       let addressLocal =  this.cryptoProvider.retrieveFromLocal("P2PUserAddress");
       let pkeyLocal = this.cryptoProvider.retrieveFromLocal("P2PUserPrivateKey");
-      // console.log(addressLocal,pkeyLocal)
+      // // console.log(addressLocal,pkeyLocal)
       if(addressLocal == "" || addressLocal == null || pkeyLocal == "" || pkeyLocal == null){
         reject({status:"failed"})
       }else{
-        var cont_address = "0x1878118d8Ca53E7f2c1d876140B1ce300ac877dC";
+        var cont_address = this.getLocalContractAddress();
         const abi = [{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimApprovers","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalFund","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"Peers","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Balance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Claim","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"ClaimVotes","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"Claims","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Settled","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"LastClaimed","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"claiming_user","type":"address"}],"name":"getClaimAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"approval_address","type":"address"}],"name":"ApproveAtomic","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"claiming_user","type":"address"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"reimbursing_address","type":"address"},{"indexed":false,"name":"claim_amount","type":"uint256"}],"name":"Reimbursed","type":"event"}];
         var contract =   this.web3.eth.contract(abi).at(cont_address);
 
         var claim_status = parseInt(contract.Claims(addressLocal));
-        // console.log("claim status is ", (claim_status));
+        // // console.log("claim status is ", (claim_status));
         if (claim_status) {
-          // console.log("Cannot Claim. Claim already pending approval.")
+          // // console.log("Cannot Claim. Claim already pending approval.")
           reject({status:"failed",message:"Cannot Claim. Claim already pending approval."});
         }
         else if(this.web3.fromWei(contract.getClaimAmount(addressLocal)) == 0){
-          // console.log('No premium paid')
+          // // console.log('No premium paid')
           reject({status:"failed",message:"No premium paid"});
         }
         else{
           var privateKey = Buffer.Buffer(pkeyLocal.slice(2, pkeyLocal.length), 'hex')
           var hexdata = contract.Claim.getData();
           var gas = 90000;
-          // console.log("hexdata", hexdata, gas);
+          // // console.log("hexdata", hexdata, gas);
           var rawtx = {
             from: addressLocal,
             to: cont_address,
@@ -511,16 +522,16 @@ export class MywebthreeProvider {
             gasLimit: this.web3.toHex(gas),
             v:"0x41"
           }
-          // console.log(rawtx);
+          // // console.log(rawtx);
           var tx = new Tx(rawtx)
-          // console.log("tx obj", tx);
+          // // console.log("tx obj", tx);
           tx.sign(privateKey);
           let serializedTx = tx.serialize().toString('hex')
-          // console.log('serializedTx:', serializedTx);
+          // // console.log('serializedTx:', serializedTx);
           this.web3.eth.sendRawTransaction("0x" + serializedTx.toString('hex'), function(err, hash){
             if (err) { 
               reject({status:"failed",message:"transaction failed"});
-              // console.log(err); 
+              // // console.log(err); 
               return; 
             }
             else{
@@ -528,7 +539,7 @@ export class MywebthreeProvider {
                 status:"ok",message:"Disability claim done",
                 hash:hash
               });
-              // console.log('tx hash: ' + hash);    
+              // // console.log('tx hash: ' + hash);    
             }
           });
         }
@@ -539,12 +550,12 @@ export class MywebthreeProvider {
   logout(){
     this.localStore.clear();
     let auth = this.cryptoProvider.retrieveTokenAuth();
-    // console.log("auth",auth)
+    // // console.log("auth",auth)
     if( auth == "" || auth == null || auth == undefined){
       this.cryptoProvider.saveTokenAuth();
-      // console.log(this.cryptoProvider.retrieveTokenAuth());
+      // // console.log(this.cryptoProvider.retrieveTokenAuth());
     }else{
-      // console.log("already created",this.cryptoProvider.retrieveTokenAuth())
+      // // console.log("already created",this.cryptoProvider.retrieveTokenAuth())
     } 
   } 
 
@@ -553,7 +564,7 @@ export class MywebthreeProvider {
   timePeriodToExit=2000;
   backbtnevent(){
  
-    console.log("routenav:",this.nav) 
+    // console.log("routenav:",this.nav) 
     // this.platform.registerBackButtonAction(() => {
     //   // get current active page
     //   let view = this.navCtrl.getActive();

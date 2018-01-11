@@ -136,16 +136,31 @@ export class UserviewsPage {
             .then(
               d=>{
                 this.loadController.dismiss();
-                console.info(d)
+                console.info(d);
+                this.toastCtrl.create({
+                  message:"Claimed approved",
+                  duration:1500,
+                  position:'middle'
+                }).present();
               },
               e=>{
                 this.loadController.dismiss();
                 console.warn(e)
+                this.toastCtrl.create({
+                  message:"Claimed failed approved",
+                  duration:1500,
+                  position:'top'
+                }).present();
               }
             ).catch(
               e=>{
                 this.loadController.dismiss();
                 console.error(e)
+                this.toastCtrl.create({
+                  message:"Claimed failed approved",
+                  duration:1500,
+                  position:'top'
+                }).present();
               }
             );
           }
