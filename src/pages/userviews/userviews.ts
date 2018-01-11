@@ -8,6 +8,7 @@ import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 import { MypopverPage } from '../mypopver/mypopver';
+import { Element } from '@angular/compiler';
 
 /**
  * Generated class for the UserviewsPage page.
@@ -27,6 +28,9 @@ export class UserviewsPage {
   loadController:any;
   @ViewChild('popoverContent', { read: MypopverPage }) content: MypopverPage;
   @ViewChild('popoverText', { read: MypopverPage }) text: MypopverPage;
+
+  @ViewChild('elem') elem:ElementRef;
+
   constructor(
     public navCtrl: NavController, 
     public myweb:MywebthreeProvider,
@@ -62,9 +66,26 @@ export class UserviewsPage {
         let dt = JSON.parse(JSON.stringify(d));
         if(dt.status=="ok"){
           this.addr_list = dt.data.addr_list;
+          let i = 0;
+          let arr = [];let arr2 = this.addr_list;
+          arr2.forEach((value,key) => {
+            console.log(value,key)
+            i = i+1;
+            arr.push({
+              rowid:i,
+              Address:value.Address,
+              Amount:value.Amount,
+              Peer:value.Peer,
+              TotalFund:value.TotalFund,
+              approve:value.apporve,
+              status:value.status,
+              votes:value.votes
+            })
+          });
+          this.addr_list = arr;
           console.log(this.addr_list)
         }else{
-
+ 
         }
       },
       e=>{
@@ -168,5 +189,11 @@ export class UserviewsPage {
       ]
     });
     confirm.present();
+  }
+
+  dofun(c){
+    console.log(c)
+    let id=c.rowid;
+    console.log(id)
   }
 }

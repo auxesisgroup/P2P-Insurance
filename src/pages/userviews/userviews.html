@@ -23,12 +23,15 @@
 
 <ion-content padding>
 
-    <ion-card *ngFor="let c of addr_list">
+    <ion-card *ngFor="let c of addr_list" >
       <ion-card-header>
           <b>Claiming address </b>
+          <!-- <input type="text"  [(ngModel)]="c.rowid"> -->
       </ion-card-header>
       <ion-card-content>
-          <b>{{c.Address?c.Address:'No Address'}}
+          <!-- <b (click)="dofun(c)"> -->
+          <b>
+            {{c.Address?c.Address:'No Address'}}
           </b>
       </ion-card-content>
       <ion-list>
