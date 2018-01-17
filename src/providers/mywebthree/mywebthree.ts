@@ -57,7 +57,7 @@ export class MywebthreeProvider {
       //     // set the provider you want from Web3.providers
       //     // web3 = new Web3(new Web3.providers.HttpProvider("http://139.59.213.205:7007"));
       //     this.web3 = new Web3(new Web3.providers.HttpProvider("http://139.59.213.205:7007"));
-      //     // console.log(this.web3)
+          console.log(this.web3)  
       // }
     }else {
       // // console.log("connected "+ this.web3.isConnected()+" ",this.web3);
