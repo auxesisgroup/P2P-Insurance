@@ -262,7 +262,7 @@ export class MywebthreeProvider {
       //   reject({status:"failed"});
       // }else{
         var flag = true;
-        var iter = 0;
+        var iter = 0; 
         var contract = this.forPayContract();
         while (flag){
           if (contract.Peers(iter) == "0x") {
